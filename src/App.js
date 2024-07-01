@@ -1,5 +1,78 @@
 import React from 'react';
-import './App.css';
+import styled, { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`;
+
+const AppContainer = styled.div`
+  text-align: center;
+`;
+
+const Header = styled.header`
+  background-color: #282c34;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
+
+const ArticlesGrid = styled.main`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+`;
+
+const ArticleContainer = styled.div`
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+
+  &.large {
+    grid-column: span 2;
+  }
+`;
+
+const ArticleImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+const ArticleText = styled.div`
+  padding: 1rem;
+  text-align: left;
+`;
+
+const ArticleHeadline = styled.h2`
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+`;
+
+const ArticleByline = styled.p`
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 1rem;
+`;
+
+const ArticleTeaser = styled.p`
+  font-size: 1rem;
+  color: #333;
+`;
 
 const articles = [
   {
@@ -82,27 +155,28 @@ const articles = [
 ];
 
 const Article = ({ article, isLarge }) => (
-  <div className={`article ${isLarge ? 'large' : ''}`}>
-    <img src={process.env.PUBLIC_URL + '/' + article.image} alt={article.head} />
-    <div className="text">
-      <h2>{article.head}</h2>
-      <p className="byline"><strong>{article.byline.text}</strong></p>
-      <p>{article.teaser}</p>
-    </div>
-  </div>
+  <ArticleContainer className={isLarge ? 'large' : ''}>
+    <ArticleImage src={process.env.PUBLIC_URL + '/' + article.image} alt={article.head} />
+    <ArticleText>
+      <ArticleHeadline>{article.head}</ArticleHeadline>
+      <ArticleByline><strong>{article.byline.text}</strong></ArticleByline>
+      <ArticleTeaser>{article.teaser}</ArticleTeaser>
+    </ArticleText>
+  </ArticleContainer>
 );
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
+  <AppContainer>
+    <GlobalStyle />
+    <Header>
       <h1>News Articles</h1>
-    </header>
-    <main className="articles-grid">
+    </Header>
+    <ArticlesGrid>
       {articles.map((article, index) => (
         <Article key={article.id} article={article} isLarge={index === 0} />
       ))}
-    </main>
-  </div>
+    </ArticlesGrid>
+  </AppContainer>
 );
 
 export default App;
