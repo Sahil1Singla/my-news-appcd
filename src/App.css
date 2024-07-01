@@ -1,0 +1,72 @@
+/* App.css */
+
+.App {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.article {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.article img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.article h2 {
+  font-size: 1.25rem;
+  margin: 10px 0;
+}
+
+.article p {
+  margin: 5px 0;
+}
+
+.article.large {
+  grid-column: span 2;
+}
+
+.article.large img {
+  height: 300px;
+}
+
+.article .byline {
+  font-weight: bold;
+  color: #555;
+}
+
+.article.large h2 {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article.large {
+    grid-column: span 1;
+  }
+}
